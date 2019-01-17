@@ -1,4 +1,4 @@
-package com.daas.db;
+package com.daas.dms;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
