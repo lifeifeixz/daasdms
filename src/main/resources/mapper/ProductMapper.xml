@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daas.dms.dao.ProductMapper">
+    <select id="findSellerAll" resultType="com.daas.dms.beans.Product"
+            parameterType="java.lang.String">
+        SELECT
+        *
+        FROM
+        product
+        <if test="#{0}!=null">
+            WHERE DATE = #{0}
+        </if>
+        GROUP BY seller
+        ORDER BY DATE DESC
+    </select>
+
+    <select id="findSellerPrice" resultType="com.daas.dms.beans.Product">
+        SELECT
+        *
+        FROM
+        product
+            WHERE DATE = #{date} AND NAME =#{name}
+        GROUP BY seller
+        ORDER BY DATE DESC
+    </select>
+
+    <select id="findSellerPriceTrend"
+            resultType="com.daas.dms.beans.Product"
+            parameterType="com.daas.dms.beans.dto.SellerPriceTrendDto">
+      SELECT
+          *
+        FROM
+          product
+        WHERE seller = #{seller}
+          AND NAME = #{name}
+        ORDER BY DATE DESC
+        LIMIT #{count}
+    </select>
+</mapper>
